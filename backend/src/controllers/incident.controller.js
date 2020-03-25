@@ -18,10 +18,24 @@ const create = async (req, res) => {
 const index = async (req, res) => {
   const { page = 1 } = req.query;
 
+  const [count] = await connection('incidents')
+    .count();
+
   const incidents = await connection('incidents')
+    .join('ongs', 'ongs.id', '=', 'incidents.ong_id') // Mescla dados da tabela incidents com a tabela ongs
     .limit(5)
     .offset((page - 1) * 5)
-    .select('*');
+    .select([
+      'incidents.*',
+      'ongs.name',
+      'ongs.email',
+      'ongs.whatsapp',
+      'ongs.city',
+      'ongs.uf',
+    ]); // Seleciona todos os dados da tabela incidents ('*') e apenas os que quero da tabela ongs
+
+  // Envia a resposta do valor total de itens (count) no header da resposta
+  res.header('X-Total-Count', count['count(*)']);
 
   return res.json(incidents);
 };
