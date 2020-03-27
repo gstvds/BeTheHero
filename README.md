@@ -1,5 +1,5 @@
 <p align='center'>
-<img alt='Be The Hero Logo' src='./mobile/assets/logo.png'>
+<img alt='Be The Hero Logo' src='https://github.com/gstvds/BeTheHero/blob/master/mobile/src/assets/logo.png'>
 </p>
 
 - Be The Hero is a project made to connect ONG's of all kind with people interested in helping
